@@ -72,9 +72,18 @@ export const angle: Angle = (v1, v2) =>
 type AngleDeg = (v1: Vector2D, v2: Vector2D) => number
 export const angleDeg: AngleDeg = (v1, v2) => angle(v1, v2) * (180 / Math.PI)
 
-type Limit = (v1: Vector2D, v2: Vector2D) => number
-export const limit: Limit = (v1, v2) =>
-  Math.acos(dot(normalize(v1), normalize(v2)))
+type Limit = (v: Vector2D, min: number, max: number) => Vector2D
+export const limit: Limit = (v, min, max) => {
+  const vMagnitude = magnitude(v)
+
+  if (vMagnitude < min) {
+    return clamp(v, min)
+  } else if (vMagnitude > max) {
+    return clamp(v, max)
+  }
+
+  return v
+}
 
 type Normalize = (v: Vector2D) => Vector2D
 export const normalize: Normalize = (v: Vector2D): Vector2D => clamp(v, 1)

@@ -216,7 +216,7 @@ toArray(vector(0, 0)) // [0, 0]
 toArray(vector(1, 0)) // [1, 0]
 ```
 
-- dot
+- dot - https://en.wikipedia.org/wiki/Dot_product
 
 ```ts
 type Dot = (v1: Vector2D, v2: Vector2D) => number
@@ -225,7 +225,7 @@ type Dot = (v1: Vector2D, v2: Vector2D) => number
 ```js
 ```
 
-- angle
+- angle - calculates angle between two vectors and returns result in radians
 
 ```ts
 type Angle = (v1: Vector2D, v2: Vector2D) => number
@@ -234,7 +234,7 @@ type Angle = (v1: Vector2D, v2: Vector2D) => number
 ```js
 ```
 
-- angleDeg
+- angleDeg - calculates angle between two vectors and returns result in degrees (360)
 
 ```ts
 type AngleDeg = (v1: Vector2D, v2: Vector2D) => number
@@ -243,10 +243,10 @@ type AngleDeg = (v1: Vector2D, v2: Vector2D) => number
 ```js
 ```
 
-- limit
+- limit - clamp vector length between two values if exceeds them
 
 ```ts
-type Limit = (v1: Vector2D, v2: Vector2D) => number
+type Limit = (v: Vector2D, min: number, max: number) => Vector2D
 ```
 
 ```js
