@@ -1,69 +1,65 @@
-export type Vector2D = {
-  x: number
-  y: number
-}
+export type Vector2D = [number, number]
 
 type Vector = (x: number, y: number) => Vector2D
-export const vector: Vector = (x, y) => ({ x, y })
+export const vector: Vector = (x, y) => [x, y]
 
 type VectorZero = () => Vector2D
-export const vectorZero: VectorZero = () => vector(0, 0)
+export const vectorZero: VectorZero = () => [0, 0]
 
 type VectorUp = () => Vector2D
-export const vectorUp: VectorUp = () => vector(0, 1)
+export const vectorUp: VectorUp = () => [0, 1]
 
 type VectorRight = () => Vector2D
-export const vectorRight: VectorRight = () => vector(1, 0)
+export const vectorRight: VectorRight = () => [1, 0]
 
 type VectorDown = () => Vector2D
-export const vectorDown: VectorDown = () => vector(0, -1)
+export const vectorDown: VectorDown = () => [0, -1]
 
 type VectorLeft = () => Vector2D
-export const vectorLeft: VectorLeft = () => vector(-1, 0)
+export const vectorLeft: VectorLeft = () => [-1, 0]
 
 type VectorOne = () => Vector2D
-export const vectorOne: VectorOne = () => vector(1, 1)
+export const vectorOne: VectorOne = () => [1, 1]
 
 type Add = (v1: Vector2D, v2: Vector2D) => Vector2D
-export const add: Add = (v1, v2) => vector(v1.x + v2.x, v1.y + v2.y)
+export const add: Add = (v1, v2) => [v1[0] + v2[0], v1[1] + v2[1]]
 
 type Sub = (v1: Vector2D, v2: Vector2D) => Vector2D
-export const sub: Sub = (v1, v2) => vector(v1.x - v2.x, v1.y - v2.y)
+export const sub: Sub = (v1, v2) => [v1[0] - v2[0], v1[1] - v2[1]]
 
 type Divide = (v1: Vector2D, v2: Vector2D) => Vector2D
-export const divide: Divide = (v1, v2) => vector(v1.x / v2.y, v1.y / v2.y)
+export const divide: Divide = (v1, v2) => [v1[0] / v2[1], v1[1] / v2[1]]
 
 type Multiply = (v1: Vector2D, v2: Vector2D) => Vector2D
-export const multiply: Multiply = (v1, v2) => vector(v1.x * v2.x, v1.y * v2.y)
+export const multiply: Multiply = (v1, v2) => [v1[0] * v2[0], v1[1] * v2[1]]
 
 type Scale = (scalar: number, v: Vector2D) => Vector2D
-export const scale: Scale = (scalar, v) => vector(v.x * scalar, v.y * scalar)
+export const scale: Scale = (scalar, v) => [v[0] * scalar, v[1] * scalar]
 
 type Magnitude = (v: Vector2D) => number
 export const magnitude: Magnitude = v =>
-  Math.sqrt(Math.pow(v.x, 2) + Math.pow(v.y, 2))
+  Math.sqrt(Math.pow(v[0], 2) + Math.pow(v[1], 2))
 
 type Distance = (v1: Vector2D, v2: Vector2D) => number
 export const distance: Distance = (v1, v2) => magnitude(sub(v1, v2))
 
 type Clamp = (v: Vector2D, vMagnitude: number) => Vector2D
 export const clamp: Clamp = (v, vMagnitude) => {
-  var ratio = magnitude(v) / vMagnitude
-  return vector(v.x / ratio, v.y / ratio)
+  const currentVectorMagnitude = magnitude(v)
+
+  if (currentVectorMagnitude === 0) {
+    return vectorZero()
+  }
+
+  const ratio = currentVectorMagnitude / vMagnitude
+  return [v[0] / ratio, v[1] / ratio]
 }
 
 type Equals = (v1: Vector2D, v2: Vector2D) => boolean
-export const equals: Equals = (v1, v2) => v1.x === v2.x && v1.y === v2.y
-
-type FromArray = (arrayOfVectors: [number, number]) => Vector2D
-export const fromArray: FromArray = arrayOfVectors =>
-  vector(arrayOfVectors[0] || 0, arrayOfVectors[1] || 0)
-
-type ToArray = (v: Vector2D) => [number, number]
-export const toArray: ToArray = v => [v.x, v.y]
+export const equals: Equals = (v1, v2) => v1[0] === v2[0] && v1[1] === v2[1]
 
 type Dot = (v1: Vector2D, v2: Vector2D) => number
-export const dot: Dot = (v1, v2) => v1.x * v2.x + v1.y * v2.y
+export const dot: Dot = (v1, v2) => v1[0] * v2[0] + v1[1] * v2[1]
 
 type Angle = (v1: Vector2D, v2: Vector2D) => number
 export const angle: Angle = (v1, v2) =>

@@ -1,6 +1,6 @@
 {
   "name": "@arekrado/vector-2d",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Pure functions to manipulate 2d vectors",
   "main": "dist/lib/vector-2d.js",
   "module": "dist/es/vector-2d.js",

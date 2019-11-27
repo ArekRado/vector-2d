@@ -7,10 +7,7 @@ npm i @arekrado/vector-2d
 ```
 
 ```ts
-type Vector2D = {
-  x: number
-  y: number
-}
+type Vector2D = [number, number]
 ```
 
 - vector
@@ -20,7 +17,7 @@ type Vector = (x: number, y: number) => Vector2D
 ```
 
 ```js
-vector(5, 10) // { x: 5, y: 10 }
+vector(5, 10) // [5, 10]
 ```
 
 - vectorZero
@@ -30,7 +27,7 @@ type VectorZero = () => Vector2D
 ```
 
 ```js
-vectorZero() // { x: 0, y: 00 }
+vectorZero() // [0, 00]
 ```
 
 - vectorUp
@@ -40,7 +37,7 @@ type VectorZero = () => Vector2D
 ```
 
 ```js
-vectorUp() // { x: 0, y: 1 }
+vectorUp() // [0, 1]
 ```
 
 - vectorRight
@@ -50,7 +47,7 @@ type VectorZero = () => Vector2D
 ```
 
 ```js
-vectorRight() // { x: 1, y: 0 }
+vectorRight() // [1, 0]
 ```
 
 - vectorDown
@@ -60,7 +57,7 @@ type VectorZero = () => Vector2D
 ```
 
 ```js
-vectorDown() // { x: 0, y: -1 }
+vectorDown() // [0, -1]
 ```
 
 - vectorLeft
@@ -70,7 +67,7 @@ type VectorZero = () => Vector2D
 ```
 
 ```js
-vectorLeft() // { x: -1, y: 0 }
+vectorLeft() // [-1, 0]
 ```
 
 - vectorOne
@@ -80,7 +77,7 @@ type VectorZero = () => Vector2D
 ```
 
 ```js
-vectorOne() // { x: 1, y: 1 }
+vectorOne() // [1, 1]
 ```
 
 - add
@@ -90,8 +87,8 @@ type Add = (v1: Vector2D, v2: Vector2D) => Vector2D
 ```
 
 ```js
-add(vector(2, 2), vector(2, 2)) // { x: 4, y: 4 }
-add(vector(-5, 10), vector(3, -3)) // { x: 2, y: 7 }
+add(vector(2, 2), vector(2, 2)) // [4, 4]
+add(vector(-5, 10), vector(3, -3)) // [2, 7]
 ```
 
 - sub
@@ -101,8 +98,8 @@ type Sub = (v1: Vector2D, v2: Vector2D) => Vector2D
 ```
 
 ```js
-sub(vector(2, 2), vector(2, 2)) // { x: 0, y: 0 }
-sub(vector(-5, 10), vector(3, -3)) // { x: 8, y: 13 }
+sub(vector(2, 2), vector(2, 2)) // [0, 0]
+sub(vector(-5, 10), vector(3, -3)) // [8, 13]
 ```
 
 - divide
@@ -112,8 +109,8 @@ type Sub = (v1: Vector2D, v2: Vector2D) => Vector2D
 ```
 
 ```js
-divide(vector(2, 2), vector(2, 2)) // { x: 1, y: 1 }
-divide(vector(10, 12), vector(2, 2)) // { x: 5, y: 6 }
+divide(vector(2, 2), vector(2, 2)) // [1, 1]
+divide(vector(10, 12), vector(2, 2)) // [5, 6]
 ```
 
 - multiply
@@ -123,8 +120,8 @@ type Sub = (v1: Vector2D, v2: Vector2D) => Vector2D
 ```
 
 ```js
-multiply(vector(2, 2), vector(2, 2)) // { x: 4, y: 4 }
-multiply(vector(5, 10), vector(3, -3)) // { x: 15, y: -30 }
+multiply(vector(2, 2), vector(2, 2)) // [4, 4]
+multiply(vector(5, 10), vector(3, -3)) // [15, -30]
 ```
 
 - scale - multiple vector by scalar (number)
@@ -134,9 +131,9 @@ type Scale = (scalar: number, v: Vector2D) => Vector2D
 ```
 
 ```js
-scale(0, vector(1, 1)) // { x: 0, y: 0 }
-scale(1, vector(1, 1)) // { x: 1, y: 1 }
-scale(10, vector(0.3, 0.4)) //  { x: 3, y: 4 }
+scale(0, vector(1, 1)) // [0, 0]
+scale(1, vector(1, 1)) // [1, 1]
+scale(10, vector(0.3, 0.4)) //  [3, 4]
 ```
 
 - magnitude - returns vector length
@@ -173,8 +170,8 @@ type Clamp = (v: Vector2D, vMagnitude: number) => Vector2D
 ```
 
 ```js
-clamp(vector(3, 4), 5) // { x: 3, y: 4 }
-clamp(vector(3, 4), 3) // { x: 1.7999999999999998, y: 2.4 }
+clamp(vector(3, 4), 5) // [3, 4]
+clamp(vector(3, 4), 3) // [1.7999999999999998, 2.4]
 ```
 
 - equals - compares two vectors
@@ -188,41 +185,18 @@ equals(vector(1, 1), vector(1, 1)) // true
 equals(vector(1, 1), vector(2, 1)) // false
 ```
 
-- fromArray - parse array to vector
-
-```ts
-type FromArray = (arrayOfVectors: [number, number]) => Vector2D
-```
-
-```js
-fromArray([0, 0]) // { x: 0, y: 0 }
-fromArray([1, 1]) // { x: 1, y: 1 }
-fromArray([1, 2]) // { x: 1, y: 2 }
-fromArray([]) // { x: 0, y: 0 }
-fromArray([1]) // { x: 1, y: 0 }
-```
-
-- toArray - parse vector to array
-
-```ts
-type ToArray = (v: Vector2D) => [number, number]
-```
-
-```js
-toArray(vectorZero()) // [0, 0]
-toArray(vector(1, 1)) // [1, 1]
-toArray(vector(1, 2)) // [1, 2]
-toArray(vector(0, 0)) // [0, 0]
-toArray(vector(1, 0)) // [1, 0]
-```
-
-- dot - https://en.wikipedia.org/wiki/Dot_product
+- dot - https://en.wikipedia.org/wiki/Dot_product - "how parallel the vectors are to each other"
 
 ```ts
 type Dot = (v1: Vector2D, v2: Vector2D) => number
 ```
 
 ```js
+dot(vectorZero(), vectorZero()) // 0
+dot(vector(1, 1), vector(1, 1)) // 2
+dot(vectorUp(), vectorDown()) // -1
+dot(vectorUp(), vectorLeft()) // 0
+dot(vectorDown(), vectorRight()) // 0
 ```
 
 - angle - calculates angle between two vectors and returns result in radians
@@ -232,6 +206,11 @@ type Angle = (v1: Vector2D, v2: Vector2D) => number
 ```
 
 ```js
+angle(vectorZero(), vectorZero()) // 1.5707963267948966
+angle(vector(1, 1), vector(1, 1)) // 2.1073424255447017e-8
+angle(vectorUp(), vectorDown()) // 3.141592653589793
+angle(vectorUp(), vectorLeft()) // 1.5707963267948966
+angle(vectorDown(), vectorRight()) // 1.5707963267948966
 ```
 
 - angleDeg - calculates angle between two vectors and returns result in degrees (360)
@@ -241,6 +220,11 @@ type AngleDeg = (v1: Vector2D, v2: Vector2D) => number
 ```
 
 ```js
+angleDeg(vectorZero(), vectorZero()) // 90
+angleDeg(vector(1, 1), vector(1, 1)) // 0.0000012074182697257333
+angleDeg(vectorUp(), vectorDown()) // 180
+angleDeg(vectorUp(), vectorLeft()) // 90
+angleDeg(vectorDown(), vectorRight()) // 90
 ```
 
 - limit - clamp vector length between two values if exceeds them
@@ -250,6 +234,10 @@ type Limit = (v: Vector2D, min: number, max: number) => Vector2D
 ```
 
 ```js
+limit(vectorZero(), 0, 0) // [3, 4]
+limit(vector(3, 4), 0, 2) /// [0, 0]
+limit(vector(3, 4), 0, 5) // [1.2, 1.6]
+limit(vector(-3, -4), 0, 2) // [-1.2, -1.6]
 ```
 
 - normalize - returns the same vector but with length equals 1
@@ -259,6 +247,7 @@ type Normalize = (v: Vector2D) => Vector2D
 ```
 
 ```js
-normalize(vector(1, 1))) // { x: 0.7071067811865475, y: 0.7071067811865475 }
-normalize(vector(1, 0)) // { x: 1, y: 0 }
+normalize(vectorZero()) // [0, 0]
+normalize(vector(1, 1))) // [0.7071067811865475, 0.7071067811865475]
+normalize(vector(1, 0)) // [1, 0]
 ```

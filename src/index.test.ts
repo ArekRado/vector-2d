@@ -15,12 +15,10 @@ import {
   distance,
   clamp,
   equals,
-  fromArray,
-  toArray,
-  // dot,
-  // angle,
-  // angleDeg,
-  // limit,
+  dot,
+  angle,
+  angleDeg,
+  limit,
   normalize,
 } from './index'
 
@@ -30,9 +28,9 @@ describe('vector', () => {
   })
 
   it('should return vector structure with correct values', () => {
-    expect(vector(0, 0)).toEqual({ x: 0, y: 0 })
-    expect(vector(1, 1)).toEqual({ x: 1, y: 1 })
-    expect(vector(-1, 0)).toEqual({ x: -1, y: 0 })
+    expect(vector(0, 0)).toEqual(vector(0, 0))
+    expect(vector(1, 1)).toEqual(vector(1, 1))
+    expect(vector(-1, 0)).toEqual(vector(-1, 0))
   })
 })
 
@@ -42,7 +40,7 @@ describe('vectorZero', () => {
   })
 
   it('should return vector structure with correct values', () => {
-    expect(vectorZero()).toEqual({ x: 0, y: 0 })
+    expect(vectorZero()).toEqual(vector(0, 0))
   })
 })
 
@@ -52,7 +50,7 @@ describe('vectorUp', () => {
   })
 
   it('should return vector structure with correct values', () => {
-    expect(vectorUp()).toEqual({ x: 0, y: 1 })
+    expect(vectorUp()).toEqual(vector(0, 1))
   })
 })
 
@@ -62,7 +60,7 @@ describe('vectorRight', () => {
   })
 
   it('should return vector structure with correct values', () => {
-    expect(vectorRight()).toEqual({ x: 1, y: 0 })
+    expect(vectorRight()).toEqual(vector(1, 0))
   })
 })
 
@@ -72,7 +70,7 @@ describe('vectorDown', () => {
   })
 
   it('should return vector structure with correct values', () => {
-    expect(vectorDown()).toEqual({ x: 0, y: -1 })
+    expect(vectorDown()).toEqual(vector(0, -1))
   })
 })
 
@@ -82,7 +80,7 @@ describe('vectorLeft', () => {
   })
 
   it('should return vector structure with correct values', () => {
-    expect(vectorLeft()).toEqual({ x: -1, y: 0 })
+    expect(vectorLeft()).toEqual(vector(-1, 0))
   })
 })
 
@@ -92,7 +90,7 @@ describe('vectorOne', () => {
   })
 
   it('should return vector structure with correct values', () => {
-    expect(vectorOne()).toEqual({ x: 1, y: 1 })
+    expect(vectorOne()).toEqual(vector(1, 1))
   })
 })
 
@@ -172,7 +170,7 @@ describe('distance', () => {
 
 describe('clamp', () => {
   it('should cut vector lenght to max value', () => {
-    // expect(clamp(vectorZero(), 1)).toEqual(vectorZero())
+    expect(clamp(vectorZero(), 1)).toEqual(vectorZero())
     expect(clamp(vector(1, 1), 1)).toEqual(
       vector(0.7071067811865475, 0.7071067811865475),
     )
@@ -198,29 +196,9 @@ describe('equals', () => {
   })
 })
 
-describe('fromArray', () => {
-  it('should parse array to vector', () => {
-    expect(fromArray([0, 0])).toEqual(vectorZero())
-    expect(fromArray([1, 1])).toEqual(vector(1, 1))
-    expect(fromArray([1, 2])).toEqual(vector(1, 2))
-    expect(fromArray([] as any)).toEqual(vector(0, 0))
-    expect(fromArray([1] as any)).toEqual(vector(1, 0))
-  })
-})
-
-describe('toArray', () => {
-  it('should parse vector to array', () => {
-    expect(toArray(vectorZero())).toEqual([0, 0])
-    expect(toArray(vector(1, 1))).toEqual([1, 1])
-    expect(toArray(vector(1, 2))).toEqual([1, 2])
-    expect(toArray(vector(0, 0))).toEqual([0, 0])
-    expect(toArray(vector(1, 0))).toEqual([1, 0])
-  })
-})
-
 describe('normalize', () => {
   it('should the same vector with length equals 1', () => {
-    // expect(normalize(vectorZero())).toEqual(vector(0, 0))
+    expect(normalize(vectorZero())).toEqual(vector(0, 0))
     expect(normalize(vector(1, 1))).toEqual(
       vector(0.7071067811865475, 0.7071067811865475),
     )
@@ -235,5 +213,47 @@ describe('normalize', () => {
     expect(magnitude(normalize(vector(1, 2)))).toBe(0.9999999999999999)
     expect(magnitude(normalize(vector(1, 0)))).toBe(1)
     expect(magnitude(normalize(vector(-1, 0)))).toBe(1)
+  })
+})
+
+describe('limit', () => {
+  it('should return vector with trimmed length if its required', () => {
+    expect(limit(vectorZero(), 0, 0)).toEqual(vectorZero())
+    expect(limit(vector(3, 4), 0, 5)).toEqual(vector(3, 4))
+    expect(limit(vector(3, 4), 0, 2)).toEqual(vector(1.2, 1.6))
+    expect(limit(vector(-3, -4), 0, 2)).toEqual(vector(-1.2, -1.6))
+    expect(limit(vector(3, 4), 10, 20)).toEqual(vector(6, 8))
+  })
+})
+
+describe('angle', () => {
+  it('should return angle between two vectors in radians', () => {
+    expect(angle(vectorZero(), vectorZero())).toEqual(1.5707963267948966)
+    expect(angle(vector(1, 1), vector(1, 1))).toEqual(2.1073424255447017e-8)
+    expect(angle(vectorUp(), vectorDown())).toEqual(3.141592653589793)
+    expect(angle(vectorUp(), vectorLeft())).toEqual(1.5707963267948966)
+    expect(angle(vectorDown(), vectorRight())).toEqual(1.5707963267948966)
+  })
+})
+
+describe('angleDeg', () => {
+  it('should return angle between two vectors in degrees', () => {
+    expect(angleDeg(vectorZero(), vectorZero())).toEqual(90)
+    expect(angleDeg(vector(1, 1), vector(1, 1))).toEqual(
+      0.0000012074182697257333,
+    )
+    expect(angleDeg(vectorUp(), vectorDown())).toEqual(180)
+    expect(angleDeg(vectorUp(), vectorLeft())).toEqual(90)
+    expect(angleDeg(vectorDown(), vectorRight())).toEqual(90)
+  })
+})
+
+describe('dot', () => {
+  it('should return angle between two vectors in degrees', () => {
+    expect(dot(vectorZero(), vectorZero())).toEqual(0)
+    expect(dot(vector(1, 1), vector(1, 1))).toEqual(2)
+    expect(dot(vectorUp(), vectorDown())).toEqual(-1)
+    expect(dot(vectorUp(), vectorLeft())).toEqual(0)
+    expect(dot(vectorDown(), vectorRight())).toEqual(0)
   })
 })

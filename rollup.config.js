@@ -6,7 +6,10 @@ import pkg from './package.json'
 export default {
   input: './src/index.ts',
   plugins: [
-    typescript({ useTsconfigDeclarationDir: true, tsconfig: 'tsconfig.json' }),
+    typescript({
+      useTsconfigDeclarationDir: true,
+      tsconfig: 'tsconfig.json',
+    }),
     babel({
       extensions: ['.ts'],
       exclude: ['dist/**', 'node_modules/**'],
