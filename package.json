@@ -12,7 +12,8 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "test": "node_modules/.bin/jest --watchAll"
+    "test": "node_modules/.bin/jest --watchAll",
+    "example": "cd example && parcel index.html"
   },
   "devEngines": {
     "node": "8.12.0",
