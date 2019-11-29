@@ -12,12 +12,14 @@ export const merkury = (ctx, state) => {
     orbit: 130,
   })
 
+  const planetPosition = add(position, state.sun.position)
+
   drawOrbit(ctx, state.sun.position, 130)
-  drawPlanet(ctx, add(position, state.sun.position), 5, colors.merkury)
+  drawPlanet(ctx, planetPosition, 5, colors.merkury)
 
   return {
     ...state.merkury,
-    position,
+    position: planetPosition,
     progress,
   }
 }

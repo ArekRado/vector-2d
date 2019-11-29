@@ -4,10 +4,8 @@ import {
   angleDeg,
   sub,
   vectorRight,
-  vectorLeft,
   scale,
   add,
-  radianToVector,
   normalize,
   distance,
 } from '../../dist/es/vector-2d'
@@ -41,7 +39,6 @@ const earthAngle = (ctx, state) => {
     sun.position,
     scale(
       isAcuteAngle ? 40 : -40,
-
       normalize(add(normalize(diff), vectorRight())),
     ),
   )
@@ -65,18 +62,42 @@ const earthAngle = (ctx, state) => {
 }
 
 const jupiterAngle = (ctx, state) => {
-  const { jupiter } = state
+  const { mars } = state
 
   const nearestPlanetPosition = [
     state.sun,
     state.merkury,
     state.venus,
     state.earth,
-    state.mars,
-  ].map(planet => [
-    {distance}
-    moons: planet.
-  ])
+    state.jupiter,
+  ]
+    .map(planet => [
+      {
+        distance: distance(mars.position, planet.position),
+        position: planet.position,
+      },
+      planet.moons.map(moon => ({
+        distance: distance(mars.position, moon.position),
+        position: moon.position,
+      })),
+    ])
+    .flat(Infinity)
+    .sort((a, b) => (a.distance < b.distance ? -1 : 1))[0]
+
+  const from = nearestPlanetPosition.position
+  const to = mars.position
+  const half = scale(0.5, add(from, to))
+
+  ctx.beginPath()
+  ctx.lineTo(from[0], from[1])
+  ctx.lineTo(to[0], to[1])
+  ctx.stroke()
+
+  ctx.fillText(
+    `${parseInt(nearestPlanetPosition.distance)}px`,
+    half[0] + 30,
+    half[1],
+  )
 }
 
 export const drawDebug = (ctx, state) => {

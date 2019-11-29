@@ -20,11 +20,13 @@ export const moon = ({
     orbit: orbit,
   })
 
+  const moonPosition = add(centerPosition, position)
+
   drawOrbit(ctx, centerPosition, orbit)
-  drawPlanet(ctx, add(centerPosition, position), size, colors.moon)
+  drawPlanet(ctx, moonPosition, size, colors.moon)
 
   return {
-    position,
+    position: moonPosition,
     progress,
   }
 }

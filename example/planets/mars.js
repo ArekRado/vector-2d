@@ -12,12 +12,14 @@ export const mars = (ctx, state) => {
     orbit: 260,
   })
 
+  const planetPosition = add(position, state.sun.position)
+
   drawOrbit(ctx, state.sun.position, 260)
-  drawPlanet(ctx, add(position, state.sun.position), 9, colors.mars)
+  drawPlanet(ctx, planetPosition, 9, colors.mars)
 
   return {
     ...state.mars,
-    position,
+    position: planetPosition,
     progress,
   }
 }
