@@ -83,3 +83,9 @@ export const limit: Limit = (v, min, max) => {
 
 type Normalize = (v: Vector2D) => Vector2D
 export const normalize: Normalize = (v: Vector2D): Vector2D => clamp(v, 1)
+
+type RadianToVector = (radian: number) => Vector2D
+export const radianToVector: RadianToVector = (radian: number): Vector2D => [
+  Math.cos(radian),
+  Math.sin(radian),
+]

@@ -10,6 +10,8 @@ import { jupiter } from './planets/jupiter'
 // import { uranus } from './planets/uranus'
 // import { neptune } from './planets/neptune'
 // import { pluto } from './planets/pluto'
+import { debugMode } from './effects/debugMode'
+import { drawDebug } from './utils/drawDebug'
 
 export const space = (ctx, state) => {
   ctx.fillStyle = colors.space
@@ -22,8 +24,13 @@ const getTime = (now, prevNow) => ({
 })
 
 export const logic = (ctx, state) => {
+  space(ctx, state)
+
+  if (state.debugMode) {
+    drawDebug(ctx, state)
+  }
+
   const newState = {
-    space: space(ctx, state),
     sun: sun(ctx, state),
     merkury: merkury(ctx, state),
     venus: venus(ctx, state),
@@ -35,11 +42,9 @@ export const logic = (ctx, state) => {
     neptune: [0, 0],
     pluto: [0, 0],
 
-    // earthMoons: state.earthMoons(ctx, state),
-
     time: getTime(performance.now(), state.time.now),
     windowSize: [window.innerWidth, window.innerHeight],
-    // windowCenter: scale(0.5, state.windowSize),
+    debugMode: debugMode(),
   }
 
   requestAnimationFrame(() => {

@@ -6,14 +6,18 @@ import { add } from '../../dist/es/vector-2d'
 
 export const merkury = (ctx, state) => {
   const { position, progress } = movePlanet({
-    speed: 2,
-    progress: state.merkury,
+    speed: 2.1,
+    progress: state.merkury.progress,
     delta: state.time.delta,
     orbit: 130,
   })
 
-  drawOrbit(ctx, state.sun, 130)
-  drawPlanet(ctx, add(position, state.sun), 5, colors.merkury)
+  drawOrbit(ctx, state.sun.position, 130)
+  drawPlanet(ctx, add(position, state.sun.position), 5, colors.merkury)
 
-  return progress
+  return {
+    ...state.merkury,
+    position,
+    progress,
+  }
 }

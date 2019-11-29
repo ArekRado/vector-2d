@@ -6,14 +6,18 @@ import { add } from '../../dist/es/vector-2d'
 
 export const mars = (ctx, state) => {
   const { position, progress } = movePlanet({
-    speed: 0.6,
-    progress: state.mars,
+    speed: 0.666,
+    progress: state.mars.progress,
     delta: state.time.delta,
     orbit: 260,
   })
 
-  drawOrbit(ctx, state.sun, 260)
-  drawPlanet(ctx, add(position, state.sun), 9, colors.mars)
+  drawOrbit(ctx, state.sun.position, 260)
+  drawPlanet(ctx, add(position, state.sun.position), 9, colors.mars)
 
-  return progress
+  return {
+    ...state.mars,
+    position,
+    progress,
+  }
 }

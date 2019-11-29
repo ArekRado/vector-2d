@@ -1,6 +1,7 @@
 import { logic } from './logic'
-import { scale } from '../dist/es/vector-2d'
+import { scale, vectorZero } from '../dist/es/vector-2d'
 import { range } from './utils/range'
+import { debugMode } from './effects/debugMode'
 
 const canvas = document.getElementById('app')
 const ctx = canvas.getContext('2d')
@@ -18,24 +19,47 @@ const randomProgress = () => range(0, 100)
 
 requestAnimationFrame(() => {
   logic(ctx, {
-    space: [0, 0],
-    sun: scale(0.5, [window.innerWidth, window.innerHeight]),
-    merkury: randomProgress(),
-    venus: randomProgress(),
-    earth: { progress: randomProgress(), moons: [randomProgress()] },
-    mars: randomProgress(),
-    jupiter: {
-      progress: randomProgress(),
-      moons: [randomProgress(), randomProgress(), randomProgress()],
+    space: vectorZero(),
+    sun: {
+      position: scale(0.5, [window.innerWidth, window.innerHeight]),
+      moons: [],
     },
-    saturn: { progress: randomProgress(), moons: [randomProgress()] },
-    uranus: { progress: randomProgress(), moons: [randomProgress()] },
-    neptune: { progress: randomProgress(), moons: [randomProgress()] },
-    pluto: randomProgress(),
-
-    moon: randomProgress(),
+    merkury: { position: vectorZero(), progress: randomProgress(), moons: [] },
+    venus: { position: vectorZero(), progress: randomProgress(), moons: [] },
+    earth: {
+      position: vectorZero(),
+      progress: randomProgress(),
+      moons: [{ position: vectorZero(), progress: randomProgress() }],
+    },
+    mars: { position: vectorZero(), progress: randomProgress(), moons: [] },
+    jupiter: {
+      position: vectorZero(),
+      progress: randomProgress(),
+      moons: [
+        { position: vectorZero(), progress: randomProgress() },
+        { position: vectorZero(), progress: randomProgress() },
+        { position: vectorZero(), progress: randomProgress() },
+      ],
+    },
+    saturn: {
+      position: vectorZero(),
+      progress: randomProgress(),
+      moons: [{ position: vectorZero(), progress: randomProgress() }],
+    },
+    uranus: {
+      position: vectorZero(),
+      progress: randomProgress(),
+      moons: [{ position: vectorZero(), progress: randomProgress() }],
+    },
+    neptune: {
+      position: vectorZero(),
+      progress: randomProgress(),
+      moons: [{ position: vectorZero(), progress: randomProgress() }],
+    },
+    pluto: { position: vectorZero(), progress: randomProgress(), moons: [] },
 
     windowSize: [window.innerWidth, window.innerHeight],
     time: { delta: randomProgress(), now: randomProgress() },
+    debugMode: debugMode(),
   })
 })

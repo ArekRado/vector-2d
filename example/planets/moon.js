@@ -7,15 +7,15 @@ import { add } from '../../dist/es/vector-2d'
 export const moon = ({
   ctx,
   state,
-  currentProgress,
+  data,
   centerPosition,
   size,
   speed,
   orbit,
 }) => {
   const { position, progress } = movePlanet({
-    speed: speed,
-    progress: currentProgress,
+    speed,
+    progress: data.progress,
     delta: state.time.delta,
     orbit: orbit,
   })
@@ -23,5 +23,8 @@ export const moon = ({
   drawOrbit(ctx, centerPosition, orbit)
   drawPlanet(ctx, add(centerPosition, position), size, colors.moon)
 
-  return progress
+  return {
+    position,
+    progress,
+  }
 }

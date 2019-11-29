@@ -16,4 +16,5 @@ export const colors = {
 
   space: rgb(0, 26, 63),
   orbit: rgb(255, 255, 255),
+  line: rgb(255, 255, 255),
 }
