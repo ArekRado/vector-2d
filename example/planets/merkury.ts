@@ -2,23 +2,24 @@ import { movePlanet } from '../utils/movePlanet'
 import { drawOrbit } from '../utils/drawOrbit'
 import { drawPlanet } from '../utils/drawPlanet'
 import { colors } from '../utils/colors'
-import { add } from '../../dist/es/vector-2d'
+import { add } from '@arekrado/vector-2d'
+import { State } from '..'
 
-export const mars = (ctx, state) => {
+export const merkury = (ctx: CanvasRenderingContext2D, state: State) => {
   const { position, progress } = movePlanet({
-    speed: 0.666,
-    progress: state.mars.progress,
+    speed: 2.1,
+    progress: state.merkury.progress,
     delta: state.time.delta,
-    orbit: 260,
+    orbit: 130,
   })
 
   const planetPosition = add(position, state.sun.position)
 
-  drawOrbit(ctx, state.sun.position, 260)
-  drawPlanet(ctx, planetPosition, 9, colors.mars)
+  drawOrbit(ctx, state.sun.position, 130)
+  drawPlanet(ctx, planetPosition, 5, colors.merkury)
 
   return {
-    ...state.mars,
+    ...state.merkury,
     position: planetPosition,
     progress,
   }

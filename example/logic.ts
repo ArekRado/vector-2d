@@ -12,18 +12,19 @@ import { jupiter } from './planets/jupiter'
 // import { pluto } from './planets/pluto'
 import { debugMode } from './effects/debugMode'
 import { drawDebug } from './utils/drawDebug'
+import { State } from '.'
 
-export const space = (ctx, state) => {
+export const space = (ctx: CanvasRenderingContext2D, state: State) => {
   ctx.fillStyle = colors.space
   ctx.fillRect(0, 0, state.windowSize[0], state.windowSize[1])
 }
 
-const getTime = (now, prevNow) => ({
+const getTime = (now: number, prevNow: number) => ({
   delta: now - prevNow,
   now,
 })
 
-export const logic = (ctx, state) => {
+export const logic = (ctx: CanvasRenderingContext2D, state: State): void => {
   space(ctx, state)
 
   if (state.debugMode) {

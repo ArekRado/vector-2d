@@ -3,7 +3,8 @@ import { drawOrbit } from '../utils/drawOrbit'
 import { drawPlanet } from '../utils/drawPlanet'
 import { colors } from '../utils/colors'
 import { moon } from './moon'
-import { add } from '../../dist/es/vector-2d'
+import { add } from '@arekrado/vector-2d'
+import { State } from '..'
 
 const moons = [
   {
@@ -13,7 +14,7 @@ const moons = [
   },
 ]
 
-export const earth = (ctx, state) => {
+export const earth = (ctx: CanvasRenderingContext2D, state: State) => {
   const { position, progress } = movePlanet({
     speed: 1.1,
     progress: state.earth.progress,

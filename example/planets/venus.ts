@@ -2,9 +2,10 @@ import { movePlanet } from '../utils/movePlanet'
 import { drawOrbit } from '../utils/drawOrbit'
 import { drawPlanet } from '../utils/drawPlanet'
 import { colors } from '../utils/colors'
-import { add } from '../../dist/es/vector-2d'
+import { add } from '@arekrado/vector-2d'
+import { State } from '..'
 
-export const venus = (ctx, state) => {
+export const venus = (ctx: CanvasRenderingContext2D, state: State) => {
   const { position, progress } = movePlanet({
     speed: 1.2,
     progress: state.venus.progress,

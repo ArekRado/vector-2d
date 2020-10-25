@@ -1,6 +1,10 @@
 import { colors } from './colors'
 
-export const drawOrbit = (ctx, position, size) => {
+export const drawOrbit = (
+  ctx: CanvasRenderingContext2D,
+  position: Vector2D,
+  size: number,
+) => {
   ctx.beginPath()
   ctx.arc(position[0], position[1], size, 0, Math.PI * 2, true)
   ctx.strokeStyle = colors.orbit

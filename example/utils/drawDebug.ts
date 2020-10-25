@@ -8,9 +8,10 @@ import {
   add,
   normalize,
   distance,
-} from '../../dist/es/vector-2d'
+} from '@arekrado/vector-2d'
+import { State } from '..'
 
-const earthAngle = (ctx, state) => {
+const earthAngle = (ctx: CanvasRenderingContext2D, state: State) => {
   const { earth, sun } = state
 
   // Earth - Sun line
@@ -61,7 +62,7 @@ const earthAngle = (ctx, state) => {
   )
 }
 
-const jupiterAngle = (ctx, state) => {
+const jupiterAngle = (ctx: CanvasRenderingContext2D, state: State) => {
   const { mars } = state
 
   const nearestPlanetPosition = [
@@ -71,12 +72,12 @@ const jupiterAngle = (ctx, state) => {
     state.earth,
     state.jupiter,
   ]
-    .map(planet => [
+    .map((planet) => [
       {
         distance: distance(mars.position, planet.position),
         position: planet.position,
       },
-      planet.moons.map(moon => ({
+      planet.moons.map((moon) => ({
         distance: distance(mars.position, moon.position),
         position: moon.position,
       })),
@@ -100,7 +101,7 @@ const jupiterAngle = (ctx, state) => {
   )
 }
 
-export const drawDebug = (ctx, state) => {
+export const drawDebug = (ctx: CanvasRenderingContext2D, state: State) => {
   ctx.font = '15px Arial'
   ctx.fillStyle = 'white'
   ctx.textAlign = 'center'
