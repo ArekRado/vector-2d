@@ -1,4 +1,4 @@
-# [vector-2d](https://zen-snyder-043613.netlify.com/)
+# vector-2d - [Demo](https://zen-snyder-043613.netlify.com/)
 
 Pure functions to manipulate 2d vectors
 
