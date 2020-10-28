@@ -1,9 +1,0 @@
-{
-  "extends": ["tslint-config-standard"],
-  "rules": {
-    "trailing-comma": true,
-    "handle-callback-err": false,
-    "no-default-export": true,
-    "no-unused-expression": false
-  }
-}

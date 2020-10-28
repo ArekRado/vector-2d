@@ -56,7 +56,7 @@ const earthAngle = (ctx: CanvasRenderingContext2D, state: State) => {
   ctx.stroke()
 
   ctx.fillText(
-    `${parseInt(isAcuteAngle ? earthAngleDeg : 360 - earthAngleDeg)}°`,
+    `${parseInt(`${isAcuteAngle ? earthAngleDeg : 360 - earthAngleDeg}`)}°`,
     half[0],
     half[1],
   )
@@ -82,7 +82,7 @@ const jupiterAngle = (ctx: CanvasRenderingContext2D, state: State) => {
         position: moon.position,
       })),
     ])
-    .flat(Infinity)
+    .flat(20)
     .sort((a, b) => (a.distance < b.distance ? -1 : 1))[0]
 
   const from = nearestPlanetPosition.position
@@ -95,7 +95,7 @@ const jupiterAngle = (ctx: CanvasRenderingContext2D, state: State) => {
   ctx.stroke()
 
   ctx.fillText(
-    `${parseInt(nearestPlanetPosition.distance)}px`,
+    `${parseInt(nearestPlanetPosition.distance.toString())}px`,
     half[0] + 30,
     half[1],
   )

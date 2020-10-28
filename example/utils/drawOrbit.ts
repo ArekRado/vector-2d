@@ -1,3 +1,4 @@
+import { Vector2D } from '@arekrado/vector-2d'
 import { colors } from './colors'
 
 export const drawOrbit = (

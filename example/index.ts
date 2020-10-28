@@ -6,11 +6,11 @@ import { debugMode } from './effects/debugMode'
 const canvas = document.getElementById('app') as HTMLCanvasElement
 const ctx = canvas?.getContext('2d')
 
-type Moon = {
+export type Moon = {
   position: Vector2D, progress: number
 }
 
-type Planet = {
+export type Planet = {
   position: Vector2D,
   progress: number,
   moons: Moon[],

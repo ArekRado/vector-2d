@@ -1,3 +1,5 @@
+import { Vector2D } from "@arekrado/vector-2d"
+
 export const drawPlanet = (
   ctx: CanvasRenderingContext2D,
   position: Vector2D,
