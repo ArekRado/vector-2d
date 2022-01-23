@@ -1,6 +1,6 @@
 {
   "name": "@arekrado/vector-2d",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "Pure functions to manipulate 2d vectors",
   "umd:main": "dist/vector-2d.umd.production.js",
   "main": "dist/index.js",
@@ -12,10 +12,11 @@
     "dist"
   ],
   "scripts": {
-    "test": "tsdx test --env=jsdom",
-    "build": "tsdx build --tsconfig tsconfig.build.json",
-    "prepublish": "npm run build",
-    "lint": "tsdx lint",
+    "test": "jest ./src --config=jest.config.js --watch=false --coverage",
+    "test:watch": "jest ./src --config=jest.config.js --watch --coverage=false",
+    "build:pure": "./node_modules/typescript/bin/tsc --project tsconfig.build.json",
+    "build": "rm -rf dist & npm run build:pure",
+    "publish:local": "yalc publish",
     "example": "cd example && parcel index.html"
   },
   "lint-staged": {
@@ -26,7 +27,8 @@
     ]
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=16",
+    "npm": ">=8.3.0"
   },
   "repository": {
     "type": "git",
@@ -35,7 +37,9 @@
   "keywords": [
     "vector",
     "2d",
-    "Functional programming"
+    "Functional programming",
+    "FP",
+    "pure"
   ],
   "author": "Arek Rado",
   "license": "MIT",
@@ -44,14 +48,13 @@
   },
   "homepage": "https://github.com/ArekRado/vector-2d#readme",
   "devDependencies": {
-    "@babel/core": "^7.12.3",
-    "@babel/preset-env": "^7.12.1",
-    "@types/jest": "^26.0.15",
-    "jest": "^26.6.1",
-    "typescript": "^4.0.3",
-    "@babel/preset-typescript": "^7.12.1",
-    "husky": "^4.3.0",
-    "tsdx": "^0.14.1",
-    "lint-staged": "^10.4.0"
+    "@babel/core": "7.16.5",
+    "@babel/preset-env": "7.16.5",
+    "@babel/preset-typescript": "7.16.5",
+    "@types/jest": "27.0.3",
+    "babel-jest": "27.4.5",
+    "jest": "27.4.5",
+    "prettier": "2.5.1",
+    "typescript": "4.5.4"
   }
 }

@@ -2,6 +2,8 @@
 
 Pure functions to manipulate 2d vectors
 
+![cover](./cover.png)
+
 ```
 npm i @arekrado/vector-2d
 ```
@@ -27,7 +29,7 @@ type VectorZero = () => Vector2D
 ```
 
 ```js
-vectorZero() // [0, 00]
+vectorZero() // [0, 0]
 ```
 
 - vectorUp
@@ -174,15 +176,15 @@ clamp(vector(3, 4), 5) // [3, 4]
 clamp(vector(3, 4), 3) // [1.7999999999999998, 2.4]
 ```
 
-- equals - compares two vectors
+- isEqual - compares two vectors
 
 ```ts
-type Equals = (v1: Vector2D, v2: Vector2D) => boolean
+type IsEqual = (v1: Vector2D, v2: Vector2D) => boolean
 ```
 
 ```js
-equals(vector(1, 1), vector(1, 1)) // true
-equals(vector(1, 1), vector(2, 1)) // false
+isEqual(vector(1, 1), vector(1, 1)) // true
+isEqual(vector(1, 1), vector(2, 1)) // false
 ```
 
 - dot - https://en.wikipedia.org/wiki/Dot_product - "how parallel the vectors are to each other"
