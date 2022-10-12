@@ -5,7 +5,7 @@
   "umd:main": "dist/vector-2d.umd.production.js",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "module": "dist/vector-2d.esm.js",
+  "module": "dist/index.js",
   "npmName": "@arekrado/vector-2d",
   "sideEffects": false,
   "files": [
