@@ -1,16 +1,13 @@
 {
   "name": "@arekrado/vector-2d",
-  "version": "0.0.5",
+  "version": "0.0.8",
   "description": "Pure functions to manipulate 2d vectors",
   "umd:main": "dist/vector-2d.umd.production.js",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "module": "dist/index.js",
+  "module": "index.js",
   "npmName": "@arekrado/vector-2d",
   "sideEffects": false,
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "test": "jest ./src --config=jest.config.js --watch=false --coverage",
     "test:watch": "jest ./src --config=jest.config.js --watch --coverage=false",
