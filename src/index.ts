@@ -37,7 +37,7 @@ type Scale = (scalar: number, v: Vector2D) => Vector2D
 export const scale: Scale = (scalar, v) => [v[0] * scalar, v[1] * scalar]
 
 type Magnitude = (v: Vector2D) => number
-export const magnitude: Magnitude = v =>
+export const magnitude: Magnitude = (v) =>
   Math.sqrt(Math.pow(v[0], 2) + Math.pow(v[1], 2))
 
 type Distance = (v1: Vector2D, v2: Vector2D) => number
@@ -89,3 +89,7 @@ export const radianToVector: RadianToVector = (radian: number): Vector2D => [
   Math.cos(radian),
   Math.sin(radian),
 ]
+
+type Perpendicular = (v: Vector2D, clockwise?: boolean) => Vector2D
+export const perpendicular: Perpendicular = (v, clockwise = false) =>
+  clockwise ? vector(v[1], -v[0]) : vector(-v[1], v[0])

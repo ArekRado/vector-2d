@@ -20,6 +20,7 @@ import {
   angleDeg,
   limit,
   normalize,
+  perpendicular,
 } from './index'
 
 describe('vector', () => {
@@ -255,5 +256,23 @@ describe('dot', () => {
     expect(dot(vectorUp(), vectorDown())).toEqual(-1)
     expect(dot(vectorUp(), vectorLeft())).toEqual(0)
     expect(dot(vectorDown(), vectorRight())).toEqual(0)
+  })
+})
+
+describe('perpendicular', () => {
+  it('should return new vector rotated clockwise to previous', () => {
+    expect(perpendicular(vectorZero())).toEqual(vector(-0, 0))
+    expect(perpendicular(vector(1, 1))).toEqual(vector(-1, 1))
+    expect(perpendicular(vectorUp())).toEqual(vector(-1, 0))
+    expect(perpendicular(vectorLeft())).toEqual(vector(-0, -1))
+    expect(perpendicular(vectorDown())).toEqual(vector(1, 0))
+  })
+
+  it('should return new vector rotated counter clockwise to previous', () => {
+    expect(perpendicular(vectorZero(), true)).toEqual(vector(0, -0))
+    expect(perpendicular(vector(1, 1), true)).toEqual(vector(1, -1))
+    expect(perpendicular(vectorUp(), true)).toEqual(vector(1, -0))
+    expect(perpendicular(vectorLeft(), true)).toEqual(vector(0, 1))
+    expect(perpendicular(vectorDown(), true)).toEqual(vector(-1, -0))
   })
 })
