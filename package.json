@@ -2,10 +2,9 @@
   "name": "@arekrado/vector-2d",
   "version": "0.0.10",
   "description": "Pure functions to manipulate 2d vectors",
-  "umd:main": "dist/vector-2d.umd.production.js",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
-  "module": "index.js",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "module": "index.mjs",
   "npmName": "@arekrado/vector-2d",
   "sideEffects": false,
   "scripts": {
