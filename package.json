@@ -1,26 +1,38 @@
 {
   "name": "@arekrado/vector-2d",
-  "version": "0.0.10",
+  "version": "0.0.12",
   "description": "Pure functions to manipulate 2d vectors",
-  "main": "index.js",
-  "types": "index.d.ts",
-  "module": "index.mjs",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.mjs",
+  "type": "commonjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.es.mjs",
+      "default": "./dist/index.umd.js"
+    }
+  },
   "npmName": "@arekrado/vector-2d",
   "sideEffects": false,
   "scripts": {
     "test": "jest ./src --config=jest.config.js --watch=false --coverage",
     "test:watch": "jest ./src --config=jest.config.js --watch --coverage=false",
-    "build": "sh ./build.sh",
+    "build": "vite build",
     "example": "cd example && parcel index.html"
   },
   "engines": {
-    "node": ">=18",
-    "npm": ">=8.3.0"
+    "node": ">=20",
+    "npm": ">=9.8.0"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ArekRado/vector-2d.git"
   },
+  "files": [
+    "dist",
+    "LICENSE"
+  ],
   "keywords": [
     "vector",
     "2d",
@@ -42,6 +54,10 @@
     "babel-jest": "^29.6.2",
     "jest": "^29.6.2",
     "prettier": "^3.0.0",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "vite-plugin-dts": "^3.7.2"
+  },
+  "dependencies": {
+    "vite": "^5.1.1"
   }
 }
